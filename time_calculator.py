@@ -7,7 +7,7 @@ def add_time(start, duration, day_of_week=""):
 
     if sum_of_time > 12:
         sum_of_time -= 12
-        
+
         if int(str(sum_of_time)[2:4]) >= 60:
             sum_of_time += 1
             sum_of_time -= .60
@@ -19,16 +19,34 @@ def add_time(start, duration, day_of_week=""):
             new_time = "{:.2f} AM".format(sum_of_time)
             new_time = new_time.replace('.',':',1)
     else:
-        if am_or_pm_time == "AM" and sum_of_time:
-            new_time = "{:.2f} AM".format(sum_of_time)
-            new_time = new_time.replace('.',':',1)
-        elif am_or_pm_time == "PM":
-            new_time = "{:.2f} PM".format(sum_of_time)
-            new_time = new_time.replace('.',':',1)
+        if len(str(sum_of_time)) > 4:
+            if int(str(sum_of_time)[3:5]) >= 60:
+                sum_of_time += 1
+                sum_of_time -= .60
+        else:
+            if int(str(sum_of_time)[2:4]) >= 60:
+                sum_of_time += 1
+                sum_of_time -= .60
+
+        if sum_of_time > 12:
+            if am_or_pm_time == "AM":
+                print(sum_of_time)
+                new_time = "{:.2f} PM".format(sum_of_time)
+                new_time = new_time.replace('.',':',1)
+            elif am_or_pm_time == "PM":
+                new_time = "{:.2f} AM".format(sum_of_time)
+                new_time = new_time.replace('.',':',1)
+        else:
+            if am_or_pm_time == "AM":
+                new_time = "{:.2f} AM".format(sum_of_time)
+                new_time = new_time.replace('.',':',1)
+            elif am_or_pm_time == "PM":
+                new_time = "{:.2f} PM".format(sum_of_time)
+                new_time = new_time.replace('.',':',1)
 
 
     print(new_time)
     return new_time
 
 
-add_time("11:55 AM", "3:12")
+add_time("11:40 AM", "0:25")
